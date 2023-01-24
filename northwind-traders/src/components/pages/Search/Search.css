@@ -1,0 +1,66 @@
+.card-container{
+}
+
+.input-control{
+  position: relative;
+
+}
+
+.search-input{
+  position: relative;
+  width: 50%;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  padding: 0.5rem 0.75rem;
+  padding-left: 2.5rem;
+  height: 2.5rem;
+  font-size: 100%;
+}
+
+.search-input:focus {
+    outline: 3.5px solid #34aadc;
+    opacity: 0.6;
+}
+
+.search-icon{
+  position: absolute;
+  left: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+.control{
+  margin-right: 0.75rem;
+}
+
+.control-label{
+  font-weight: 400;
+}
+.selectors{
+  display: flex;
+}
+
+.selectors-input{
+  margin: 0.25em;
+}
+
+.search-results{
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.search-result-container{
+  margin-top: 1.5rem;
+}
+.search-container{
+  margin-top: 0.5rem;
+}
+
+.search-result-description{
+  font-size: .875rem;
+  color: rgb(156 163 175);
+}
