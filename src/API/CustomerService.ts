@@ -2,7 +2,6 @@ import axios from 'axios'
 
 export default class CustomerService {
 	static async getAll(limit: number, page: number) {
-		console.log(process.env.REACT_APP_SERVER_URL)
 		const customers = await axios.get(
 			`${process.env.REACT_APP_SERVER_URL}/api/customer/all`,
 			{

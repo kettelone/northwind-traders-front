@@ -18,7 +18,6 @@ const CustomersList = () => {
     async function fetchProducts() {
       setIsSuppliersLoading(true)
       const response = await CustomerService.getAll(limit, currentPage)
-      console.log({ response })
       setCustomers(response.data.rows)
       setTotalPages(getPageCount(response.data.count, limit))
       setIsSuppliersLoading(false)

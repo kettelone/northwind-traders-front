@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   const subscribe = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/dash/get-messages')
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/dash/get-messages`)
       updateSql(response.data)
       await subscribe()
     } catch(e) {
