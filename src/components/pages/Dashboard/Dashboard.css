@@ -37,3 +37,7 @@
   font-family: ui-monospace, Courier, monospace;
 }
 
+.sql-query-info{
+  color:rgb(156 163 175)
+}
+

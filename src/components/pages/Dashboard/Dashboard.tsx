@@ -1,34 +1,11 @@
-import React, {useEffect} from 'react';
-import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react';
+import {useSelector } from 'react-redux'
 import './Dashboard.css'
 import { v4 as uuidv4 } from 'uuid';
 import { DeafultState } from '../../../store/store'
-
 const Dashboard = () => {
 
-  const dispatch = useDispatch()
-  const sql = useSelector((state: DeafultState) => state.info)
-
-  const updateSql = (data: { msg: Array<string | number> }) => {
-    dispatch({ type: "ADD_SQL", payload: data })
-  }
-
-  const subscribe = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/dash/get-messages`)
-      updateSql(response.data)
-      await subscribe()
-    } catch(e) {
-      setTimeout(() => {
-          subscribe()
-        }, 500)
-    }
-  }
-
-  useEffect(() => {
-    subscribe()
-  }, [])
+  const {info, metrics} = useSelector((state: DeafultState) => state)
 
   return (
     <div className='card-container'>
@@ -42,21 +19,24 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="dash-text-xl">SQL Metrics</p>
-              <p className="dash-text-sm">Query count: {sql.length ? sql.length: 0}</p>
-              <p className="dash-text-sm">Results count: 46</p>
-              <p className="dash-text-sm">#SELECT: 6</p>
-              <p className="dash-text-sm">#SELECT WHERE: 2</p>
-              <p className="dash-text-sm  ">#SELECT LEFT JOIN: 0</p>
+              <p className="dash-text-sm">Query count: {metrics.query_count ? metrics.query_count : 0}</p>
+              <p className="dash-text-sm">Results count: {metrics.result_count ? metrics.result_count : 0}</p>
+              <p className="dash-text-sm">#SELECT: { metrics.select ? metrics.select: 0}</p>
+              <p className="dash-text-sm">#SELECT WHERE: { metrics.select_where ? metrics.select_where: 0}</p>
+              <p className="dash-text-sm  ">#SELECT LEFT JOIN: { metrics.select_left_join ? metrics.select_left_join: 0}</p>
             </div>
           </div>
           <p className="dash-text-xl activity-log">Activity Log</p>
           <p className="dash-text-xs">Explore the app and see metrics here</p>
           <div className="queries-container">
-            {sql
-              ? sql.map(data =>
+            {info
+              ? info.map(data =>
                 <div className='single-query' key={uuidv4()}>
-                  {/* <p className="sql-query-info">{ new Date(Date.now()).toISOString()}{data.timing}</p> */}
-                  <p className="sql-query">{data.msg[0]}</p>
+                  <p className="sql-query-info">
+                    <span>{data.date ? data.date + ',' : ''} </span>
+                    <span>{data.timing ? data.timing + 'ms': ''}</span>
+                  </p>
+                  <p className="sql-query">{data.sqlString}</p>
                 </div>
               )
               : ''}

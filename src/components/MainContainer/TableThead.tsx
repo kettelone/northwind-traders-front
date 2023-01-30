@@ -12,7 +12,7 @@ const TableThead = (props: Props) => {
       {
         props.theads.map(thead => 
           thead === 'Company'
-            ? <th> </th>
+            ? <th key={uuidv4()}> </th>
             : ''
         )  
       }
