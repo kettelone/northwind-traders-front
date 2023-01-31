@@ -26,7 +26,7 @@ const Dashboard = () => {
               <p className="dash-text-sm  ">#SELECT LEFT JOIN: { metrics.select_left_join ? metrics.select_left_join: 0}</p>
             </div>
           </div>
-          <p className="dash-text-xl activity-log">Activity Log</p>
+          <p className="dash-text-xl activity-log">Activity log</p>
           <p className="dash-text-xs">Explore the app and see metrics here</p>
           <div className="queries-container">
             {info

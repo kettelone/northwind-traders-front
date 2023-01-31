@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import CustomerService from '../../../API/CustomerService';
 import { getPageCount } from '../../../utils/pages'
 import Pagination from '../../UI/Pagination/Paginantion';
@@ -6,7 +7,6 @@ import TableThead from '../../MainContainer/TableThead';
 import Loader from '../../UI/Loader/Loader';
 import Header from '../../MainContainer/Header';
 import ItemsList from '../../MainContainer/ItemsList';
-import { useDispatch } from 'react-redux'
 
 const CustomersList = () => {
   const limit = 20

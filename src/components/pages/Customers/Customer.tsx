@@ -6,24 +6,24 @@ import CustomerService from '../../../API/CustomerService';
 import NavButtonElement from '../../UI/Button/NavButtonElement';
 
 const Customer = () => {
-  const params = useParams()
+  const {id} = useParams()
   const [customer, setCustomer] = useState()
   const dispatch = useDispatch()
 
 
   useEffect(() => {
     async function fetchSupplier() {
-      if (!params.id) {
+      if (!id) {
         return 
       }
-      const response = await CustomerService.getOneById(params.id)
+      const response = await CustomerService.getOneById(id)
       const { customer } = response.data
       const { data, metrics } = response.data.searchData
       dispatch({ type: "ADD_SQL", payload: data, metrics })
       setCustomer(customer)
     }
     fetchSupplier()
-  }, [params])
+  }, [id])
 
   if (!customer) {
     return null

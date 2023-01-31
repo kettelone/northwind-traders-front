@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import OneItem from '../../MainContainer/OneItem';
 import ProductService from '../../../API/ProductsService';
 import NavButtonElement from '../../UI/Button/NavButtonElement';
 
 const Product = () => {
-  const params = useParams()
+  const {id} = useParams()
   const [product, setProduct] = useState([])
   const [supplierId, setSupplierId] = useState()
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     async function fetchSupplier() {
-
-      if (!params.id)
-        return
-      
-      const response = await ProductService.getOneById(params.id)
-      setSupplierId(response.data.supplierId)
-      delete response.data.supplierId
-      setProduct(response.data)
+      if (!id) return
+      const response = await ProductService.getOneById(id)
+      setSupplierId(response.data.finalProduct.supplierId)
+      delete response.data.finalProduct.supplierId
+      const { data, metrics } = response.data.searchData
+      dispatch({ type: "ADD_SQL", payload: data, metrics })
+      setProduct(response.data.finalProduct)
     }
     fetchSupplier()
   }, [])

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import ProductService from '../../../API/ProductsService';
 import { getPageCount } from '../../../utils/pages'
 import Pagination from '../../UI/Pagination/Paginantion';
@@ -13,13 +14,17 @@ const ProductsList = () => {
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isSuppliersLoading, setIsSuppliersLoading] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     async function fetchProducts() {
       setIsSuppliersLoading(true)
       const response = await ProductService.getAll(limit, currentPage)
-      setProducts(response.data.rows)
-      setTotalPages(getPageCount(response.data.count, limit))
+      const { rows, count } = response.data.products
+      const { data, metrics } = response.data.searchData
+      setProducts(rows)
+      setTotalPages(getPageCount(count, limit))
+      dispatch({ type: "ADD_SQL", payload: data, metrics })
       setIsSuppliersLoading(false)
     }
     fetchProducts();

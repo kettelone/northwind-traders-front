@@ -1,159 +1,120 @@
 import React, { useState } from 'react';
-import './Search.css'
-import SearchIcon from '@mui/icons-material/Search';
-import searchService from '../../../API/SearchService';
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid';
+import './Search.css'
+import searchService from '../../../API/SearchService';
+import SearchInput from './SearchInput';
+import RadioButtons from './RadioButtons';
+import CompanyResult from './CompanyResult';
+import ProductResult from './ProductResult';
 
-// interface SearchResultCustomers{
-//   companyName?: string,
-//   id?:number,
-//   contactName?:string,
-//   contactTitle?:string,
-//   phone?:string
-// }
+interface SearchResultCustomers{
+    data: {
+      result: {
+        rows: {
+          companyName?: string,
+          id?: number,
+          contactName?: string,
+          contactTitle?: string,
+          phone?: string
+        }[]
+      },
+      searchData: {
+        data:{}
+        metrics:{}
+      }
+    }
+}
 
-// interface SearchResultProducts{
-//   id:number,
-//   productName: string,
-//   quantityPerUnit: string,
-//   unitPrice: string,
-//   unitsInStock:number
-// }
+interface SearchResultProducts {
+  data: {
+    result: {
+      rows: {
+        id: number,
+        productName: string,
+        quantityPerUnit: string,
+        unitPrice: string,
+        unitsInStock: number
+      }[]
+    },
+    searchData: {
+      data: {}
+      metrics: {}
+    }
+  }
+}
   
 const Search = () => {
   const [searchInput, setSearchInput] = useState('')
   const [customerChecked, setCustomerChecked] = useState(false)
   const [productsChecked, setProductsChecked] = useState(true)
-  const [searchResults, setSearchResults] = useState()
+  const [searchResults, setSearchResults] = useState({})
+  const dispatch = useDispatch()
+
+  const handleDispatch = (response: SearchResultCustomers | SearchResultProducts) => {
+    if (response.data.searchData) {
+      const { data, metrics } = response.data.searchData
+      dispatch({ type: "ADD_SQL", payload: data, metrics })
+    }
+  }
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value)
   }
 
-  const customerChange = () => {
-    setProductsChecked(false)
-    setCustomerChecked(true)
-    findCustomers()
-  }
-
-  const productChange = () => {
-    setCustomerChecked(false)
-    setProductsChecked(true)
-    findProducts()
-
-  }
-
   const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter'){
-      let response
+      let response: SearchResultCustomers | SearchResultProducts
       if (customerChecked) {
         response = await searchService.getCustomers(searchInput)
-        setSearchResults(response.data.rows)
+        setSearchResults(response.data.result?.rows)
+        handleDispatch(response)
         return
-      } else if (productsChecked) {
+      } else if (productsChecked) { 
         response = await searchService.getProducts(searchInput)
-        setSearchResults(response.data.rows)
+        setSearchResults(response.data.result?.rows)
+        handleDispatch(response)
+        return
       }
     }
   }
 
-  const findCustomers = async() => {
-    const response = await searchService.getCustomers(searchInput)
-    setSearchResults(response.data.rows)
-    return
+  const customerChange = async() => {
+    setProductsChecked(false)
+    setCustomerChecked(true)
+    const response: SearchResultCustomers = await searchService.getCustomers(searchInput)
+    setSearchResults(response.data.result?.rows)
+    handleDispatch(response)
   }
 
-  const findProducts = async () => {
-    const response = await searchService.getProducts(searchInput)
-    setSearchResults(response.data.rows)
+  const productChange = async () => {
+    setCustomerChecked(false)
+    setProductsChecked(true)
+    const response: SearchResultProducts = await searchService.getProducts(searchInput)
+    setSearchResults(response.data.result?.rows)
+    handleDispatch(response)
   }
 
   return (
     <div className='card-container'>
       <div className="card">
         <div className="card-content">
-          <div className="field">
-            <label className='label'>
-              Search Database
-            </label>
-            <div className="field-body">
-              <div className="field">
-                <div className="input-control">
-                  <input
-                    placeholder='Enter keyword...'
-                    className='search-input'
-                    onChange={handleInput}
-                    onKeyPress={handleKeyDown}
-                  />
-                  <span className='search-icon'><SearchIcon /></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Tables</label>
-            <div className="field-body">
-              <div className="selectors">
-                <div className="control">
-                  <label className="radio">
-                    <input
-                      type="radio"
-                      className='selectors-input'
-                      value='products'
-                      checked={productsChecked}
-                      onChange={productChange}
-                    />
-                    <span className="check"></span>
-                    <span className="control-label">
-                      Products
-                    </span>
-                  </label>
-                </div>
-                <div className="control">
-                  <label className="radio">
-                    <input type="radio"
-                      className='selectors-input'
-                      value='customers'
-                      checked={customerChecked}
-                      onChange={customerChange}
-                    />
-                    <span className="control-label">
-                      Customers
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SearchInput
+            handleInput={handleInput}
+            handleKeyDown={handleKeyDown} />
+          <RadioButtons
+            productsChecked={productsChecked}
+            productChange={productChange}
+            customerChecked={customerChecked}
+            customerChange={customerChange}
+          />
           <p className="search-results">Search results</p>
-          {searchResults
+          {Array.isArray(searchResults) && searchResults.length > 0
             ?
-            //@ts-ignore
             searchResults.map((result, index) => 
                 result.companyName
-                  ?
-                  <p className='search-container' key={uuidv4()}>
-                    <p className='search-result-name'>
-                      <Link to={`/customer/${result.id}`}>
-                        {result.companyName}
-                      </Link>
-                    </p>
-                    <p className='search-result-description'>
-                      #{index + 1} Contact: {result.contactName}, Title: {result.contactTitle}, Phone: {result.phone}
-                    </p>
-                  </p>
-                  :
-                  <p className='search-container'>
-                    <p className='search-result-name'>
-                      <Link to={`/product/${result.id}`}>
-                        {result.productName}
-                      </Link>
-                    </p>
-                    <p className='search-result-description'>
-                      #{index + 1} Quantity Per Unit: {result.quantityPerUnit}, Price: {result.unitPrice}, Stock: {result.unitsInStock}
-                    </p>
-                  </p>
+                ? <CompanyResult result={result} index={index} key={uuidv4()} />
+                : <ProductResult result={result} index={index} key={uuidv4()} />
               )
               : 'No results '}
         </div>
