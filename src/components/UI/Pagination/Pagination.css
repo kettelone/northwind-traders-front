@@ -11,25 +11,26 @@
     display: flex;
  }
  
- .pagination-item {
-    padding: 0 12px;
-    height: 32px;
+ .pagination-button {
+    padding: 0.5rem 1rem;
     margin: auto 4px;
-    border: 0px solid white;
+    border: 1px solid white;
     color: rgba(0, 0, 0, 0.87);
-    border-color: rgb(209 213 219);
     background-color: white;
     display: flex;
     align-items: center;
-    letter-spacing: 0.01071em;
     border-radius: 4px;
     line-height: 1.43;
     font-size: 1rem;
     min-width: 32px;
   }
 
+  .pagination-button:active{
+      background-color: yellowgreen;
+  }
+
  .button.active{
-      border: 0px solid blue;
+      border: 1px solid blue;
     /* border: 0px solid rgb(209 213 219); */
   }
 
@@ -38,10 +39,11 @@
     cursor: default;
   }
 
-  .pagination-item:hover{
+  .pagination-button:hover{
     cursor: pointer;
+    border: 1px solid rgb(209 213 219);
   }
 
   .pagination-text{
-    font-size: 100%;
+    font-size: 0.8em;
   }

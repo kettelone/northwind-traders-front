@@ -39,14 +39,14 @@ const Pagination = (props: Props) => {
         {paginationRange!.map(pageNumber =>
           pageNumber === DOTS
             ? <button
-              className="pagination-item dots"
+              className="pagination-button dots"
               key={uuidv4()}
             >
               &#8230;
               </button>
             : typeof pageNumber === 'number'
               ? <button
-              className='pagination-item'
+              className='pagination-button'
               onClick={() => onPageChange(pageNumber)}
               key={uuidv4()}
             >
