@@ -25,14 +25,14 @@
     min-width: 32px;
   }
 
-  .pagination-button:active{
+  /* .pagination-button:active{
       background-color: yellowgreen;
-  }
+  } */
 
- .button.active{
+ /* .button.active{
       border: 1px solid blue;
-    /* border: 0px solid rgb(209 213 219); */
-  }
+    border: 0px solid rgb(209 213 219);
+  } */
 
   .dots:hover {
     background-color: transparent;
