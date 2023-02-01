@@ -28,14 +28,20 @@ const Product = () => {
 
   return (
     <div className='main-container-wrapper'>
-      <OneItem
-        header={'Product Information'}
-        data={product}
-        firstColunmItems={firstColunmItems}
-        externalLink={`/supplier/${supplierId}`}
-        externalProperty={'Supplier'}
-      />
-      <NavButtonElement backTo={'/products' } />
+      {product
+        ?
+        <div>
+          <OneItem
+            header={'Product Information'}
+            data={product}
+            firstColunmItems={firstColunmItems}
+            externalLink={`/supplier/${supplierId}`}
+            externalProperty={'Supplier'}
+          />
+          <NavButtonElement backTo={'/products'} />
+        </div>
+        : 'No such product'
+      }
     </div>
   );
 };

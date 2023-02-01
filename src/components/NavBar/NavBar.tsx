@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import './NavBar.css'
 
 const NavBar = () => {
   let [time, setTime] = useState(new Date())

@@ -31,15 +31,16 @@ const Employee = () => {
 
   return (
     <div className='main-container-wrapper'>
-      <OneItem
-        header={'Employee information'}
-        data={employee}
-        firstColunmItems={firstColunmItems}
-        backTo={'/employees'}
-        externalLink={`/employee/${reportsToPersonId}`}
-        externalProperty={'Reports To'}
-      />
-      <NavButtonElement backTo={'/employees'} />
+          <OneItem
+            header={'Employee information'}
+            data={employee}
+            firstColunmItems={firstColunmItems}
+            backTo={'/employees'}
+            externalLink={`/employee/${reportsToPersonId}`}
+            externalProperty={'Reports To'}
+          />
+          <NavButtonElement backTo={'/employees'} />
+
     </div>
   );
 };

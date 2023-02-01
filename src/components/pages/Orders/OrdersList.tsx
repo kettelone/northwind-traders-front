@@ -19,7 +19,6 @@ const OrdersList = () => {
     async function fetchEmployees() {
       setIsSuppliersLoading(true)
       const response = await OrdersService.getAll(limit, currentPage)
-      console.log({ response })
       setOrders(response.data.orders)
       setTotalPages(getPageCount(response.data.count, limit))
       setIsSuppliersLoading(false)

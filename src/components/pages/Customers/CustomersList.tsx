@@ -13,26 +13,25 @@ const CustomersList = () => {
   const [customers, setCustomers] = useState([])
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [isSuppliersLoading, setIsSuppliersLoading] = useState(false)
+  const [isCustomersLoading, setIsCustomersLoading] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
     async function fetchCustomers() {
-      setIsSuppliersLoading(true)
+      setIsCustomersLoading(true)
       const response = await CustomerService.getAll(limit, currentPage)
       const { rows, count } = response.data.customers
       const { data, metrics } = response.data.searchData
       setCustomers(rows)
       setTotalPages(getPageCount(count, limit))
       dispatch({ type: "ADD_SQL", payload: data , metrics })
-      setIsSuppliersLoading(false)
+      setIsCustomersLoading(false)
     }
     fetchCustomers();
   }, [currentPage, limit])
-
   return (
     <ItemsList
-      isLoading={isSuppliersLoading}
+      isLoading={isCustomersLoading}
       loader={<Loader value={'customer'} />}
       header={<Header title={'Customers'} />}
       table={

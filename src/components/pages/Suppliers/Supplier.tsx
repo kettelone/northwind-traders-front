@@ -27,12 +27,18 @@ const Supplier = () => {
   const firstColunmItems = Math.ceil(Object.keys(supplier).length / 2)
   return (
     <div className='main-container-wrapper'>
-      <OneItem
-        header={'Supplier Information'}
-        data={supplier}
-        firstColunmItems={firstColunmItems}
-      />
-      <NavButtonElement backTo={'/suppliers' } />
+      {supplier
+        ?
+        <div>
+          <OneItem
+            header={'Supplier Information'}
+            data={supplier}
+            firstColunmItems={firstColunmItems}
+          />
+          <NavButtonElement backTo={'/suppliers'} />
+        </div>
+        :'No such supplier'
+      }
     </div>
   );
 };

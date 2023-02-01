@@ -30,40 +30,46 @@ const Order = () => {
   const firstColunmItems = Math.ceil(Object.keys(order).length / 2)
   return (
     <div className='main-container-wrapper'>
-    <OneItem
-      header={'Order Information'}
-      data={order}
-        firstColunmItems={firstColunmItems}
- 
-      externalLink={`/customer/${order['Customer Id']}`}
-      externalProperty={'Customer Id'}
-      />
-      <ProductInOrderList
-        table={
-          <TableThead
-            theads={[
-              'Product',
-              'Quantity',
-              'Order Price',
-              'Total Price',
-              'Discount',
-            ]}
+      {order
+        ?
+        <div>
+          <OneItem
+            header={'Order Information'}
+            data={order}
+            firstColunmItems={firstColunmItems}
+
+            externalLink={`/customer/${order['Customer Id']}`}
+            externalProperty={'Customer Id'}
           />
-        }
-        items={productsInOrder}
-        base={'/product'}
-        header={'Products in Order'}
-        tableValues={
-          [
-            "productName",
-            "quantity",
-            "unitPrice",
-            "totalPrice",
-            "discount"
-          ]
-        }
-      />
-      <NavButtonElement backTo={'/orders'} />
+          <ProductInOrderList
+            table={
+              <TableThead
+                theads={[
+                  'Product',
+                  'Quantity',
+                  'Order Price',
+                  'Total Price',
+                  'Discount',
+                ]}
+              />
+            }
+            items={productsInOrder}
+            base={'/product'}
+            header={'Products in Order'}
+            tableValues={
+              [
+                "productName",
+                "quantity",
+                "unitPrice",
+                "totalPrice",
+                "discount"
+              ]
+            }
+          />
+          <NavButtonElement backTo={'/orders'} />
+        </div>
+        : 'No such order'
+      }
     </div>
   );
 };

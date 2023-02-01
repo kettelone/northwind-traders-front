@@ -14,7 +14,7 @@ interface Props {
 
 }
 
-const ItemSummary = (props :Props) => {
+const ItemSummary = (props: Props) => {
   return (
     <tbody className={props.class}>
       <tr>
@@ -22,7 +22,11 @@ const ItemSummary = (props :Props) => {
           props.value.companyName
             ? <td className='image-cell'>
               <div className='name-initials-container'>
-                CC
+                <img
+                  src={`https://avatars.dicebear.com/v2/initials/${props.tableValue[1]}.svg`}
+                  alt='initials'
+                  className='rounded-full'
+                />
               </div>
             </td>
             : ''

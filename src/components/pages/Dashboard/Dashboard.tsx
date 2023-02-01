@@ -1,9 +1,21 @@
-import React from 'react';
-import {useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
+import axios from 'axios';
 import './Dashboard.css'
 import { v4 as uuidv4 } from 'uuid';
 import { DeafultState } from '../../../store/store'
 const Dashboard = () => {
+
+  const [country, setCountry] = useState('')
+  
+  useEffect(() => {
+    const getCountry = async () => {
+      //AddBlock browser extension blocks call to this API
+      const response: { data: string } = await axios.get('https://ipapi.co/country/')
+      setCountry(response.data)
+    }
+    getCountry()
+  },[])
 
   const {info, metrics} = useSelector((state: DeafultState) => state)
 
@@ -15,7 +27,7 @@ const Dashboard = () => {
             <div>
               <p className="dash-text-xl">Worker</p>
               <p className="dash-text-sm">Colo: NRT</p>
-              <p className="dash-text-sm">Country: AE</p>
+              <p className="dash-text-sm">Country: {country}</p>
             </div>
             <div>
               <p className="dash-text-xl">SQL Metrics</p>

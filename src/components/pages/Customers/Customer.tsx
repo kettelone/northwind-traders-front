@@ -8,6 +8,8 @@ import NavButtonElement from '../../UI/Button/NavButtonElement';
 const Customer = () => {
   const {id} = useParams()
   const [customer, setCustomer] = useState()
+  const [isCustomerLoading, setIsCustomerLoading] = useState(false)
+
   const dispatch = useDispatch()
 
 
@@ -16,11 +18,13 @@ const Customer = () => {
       if (!id) {
         return 
       }
+      setIsCustomerLoading(true)
       const response = await CustomerService.getOneById(id)
       const { customer } = response.data
       const { data, metrics } = response.data.searchData
       dispatch({ type: "ADD_SQL", payload: data, metrics })
       setCustomer(customer)
+      setIsCustomerLoading(false)
     }
     fetchSupplier()
   }, [id])
@@ -29,16 +33,16 @@ const Customer = () => {
     return null
   }
   const firstColunmItems = Math.ceil(Object.keys(customer).length / 2)
-
   return (
     <div className='main-container-wrapper'>
-      <OneItem
-        header={'Customer information'}
-        data={customer}
-        firstColunmItems={firstColunmItems}
-        backTo={'/customers'}
-      />
-      <NavButtonElement backTo={'/customers'} />
+        <OneItem
+          header={'Customer information'}
+          data={customer}
+          firstColunmItems={firstColunmItems}
+          backTo={'/customers'}
+        />
+        <NavButtonElement backTo={'/customers'} />
+
     </div>
   );
 };

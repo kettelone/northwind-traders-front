@@ -38,19 +38,20 @@ const Pagination = (props: Props) => {
       <div className="pagination-items-wrapper">
         {paginationRange!.map(pageNumber =>
           pageNumber === DOTS
-            ? <div
-                className="pagination-item dots"
-                key={uuidv4()}>
-                &#8230;
-              </div>
+            ? <button
+              className="pagination-item dots"
+              key={uuidv4()}
+            >
+              &#8230;
+              </button>
             : typeof pageNumber === 'number'
-              ? <div
+              ? <button
               className='pagination-item'
               onClick={() => onPageChange(pageNumber)}
               key={uuidv4()}
             >
               {pageNumber}
-              </div>
+              </button>
               :''
 
         )}
