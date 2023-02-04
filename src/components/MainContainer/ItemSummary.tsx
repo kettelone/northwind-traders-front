@@ -11,7 +11,7 @@ interface Props {
   },
   tableValue: Array<string>,
   base: string
-
+  prodInOrder?:boolean
 }
 
 const ItemSummary = (props: Props) => {
@@ -38,7 +38,17 @@ const ItemSummary = (props: Props) => {
               <td key={uuidv4()}>
                 <Link to={`${props.base}/${props.value.id ? props.value.id : props.value.productId}`} className='link' >{value}</Link>
               </td>
-              : <td key={uuidv4()}>{value}</td>
+            :
+              index === 1 && props.base === '/order'    
+                ? <td key={uuidv4()}>${value}</td>
+                : index === 2 && props.base === '/product'
+                  ? <td key={uuidv4()}>${value}</td>
+                  : index === 3 && props.prodInOrder === true
+                    ? <td key={uuidv4()}>${value}</td>
+                    : index === 4 && props.prodInOrder
+                      ? <td key={uuidv4()}>{value}%</td>
+                      : <td key={uuidv4()}>{value}</td>
+
           )
         }
       </tr>

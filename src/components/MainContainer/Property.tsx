@@ -20,9 +20,16 @@ const Property = (props: Props) => {
                   {props.item[props.currentKey]}
               </div>
             </Link>
-            : <div className='field-name'>
-              {props.item[props.currentKey]}
-            </div>
+            :(props.currentKey.toLowerCase().includes('price')   || 
+              props.currentKey.toLowerCase().includes('discount')|| 
+              props.currentKey.toLowerCase().includes('freight'))
+              ? <div className='field-name'>
+                  ${props.item[props.currentKey]}
+                </div>
+              : <div className='field-name'>
+                  {props.item[props.currentKey]}
+                </div>
+
         }
 
       </div>

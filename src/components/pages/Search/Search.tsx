@@ -116,7 +116,8 @@ const Search = () => {
                 ? <CompanyResult result={result} index={index} key={uuidv4()} />
                 : <ProductResult result={result} index={index} key={uuidv4()} />
               )
-              : 'No results '}
+            : <div className='no-results'>No results </div>
+          }
         </div>
     </div>
     </div>

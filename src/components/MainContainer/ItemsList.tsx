@@ -43,7 +43,8 @@ const ItemsList = (props: Props) => {
                         base={props.base}
                         value={item}
                         key={uuidv4()}
-                        class={className} />
+                        class={className}
+                      />
                     )
                   })
                 : ''

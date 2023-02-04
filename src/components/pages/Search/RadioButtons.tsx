@@ -23,7 +23,7 @@ const RadioButtons = (props: Props) => {
                 checked={props.productsChecked}
                 onChange={props.productChange}
               />
-              <span className="check"></span>
+              {/* <span className="check"></span> */}
               <span className="control-label">
                 Products
               </span>
@@ -37,6 +37,7 @@ const RadioButtons = (props: Props) => {
                 checked={props.customerChecked}
                 onChange={props.customerChange}
               />
+              {/* <span className="check"></span> */}
               <span className="control-label">
                 Customers
               </span>

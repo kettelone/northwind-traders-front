@@ -2,7 +2,7 @@ import React from 'react';
 import BallotIcon from '@mui/icons-material/Ballot';
 import Property from './Property';
 
-//Replace any with correct one !!!!!!!!!!!
+//TO DO: Replace <any> with correct ones 
 
 interface Props{
   header: string,
@@ -57,11 +57,6 @@ const OneItem = (props: Props) => {
               }
             </div>
           </div>
-          {/* {
-            props.itemsList
-              ? props.itemsList
-              : ''
-          } */}
         </div>
       </div>
     </div>

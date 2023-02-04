@@ -36,7 +36,8 @@ const Pagination = (props: Props) => {
   return (
     <div className='pagination-container'>
       <div className="pagination-items-wrapper">
-        {paginationRange!.map(pageNumber =>
+        {      
+          paginationRange!.map(pageNumber =>
           pageNumber === DOTS
             ? <button
               className="pagination-button dots"
@@ -45,16 +46,27 @@ const Pagination = (props: Props) => {
               &#8230;
               </button>
             : typeof pageNumber === 'number'
-              ? <button
-              className='pagination-button'
+                ? currentPage === pageNumber
+                  ?
+              <button
+              className='pagination-button page-active' 
               onClick={() => onPageChange(pageNumber)}
-              key={uuidv4()}
+                key={uuidv4()}
             >
               {pageNumber}
               </button>
+                  :
+              <button
+                className='pagination-button'
+                onClick={() => onPageChange(pageNumber)}
+                key={uuidv4()}
+                  >
+                {pageNumber}
+              </button>
               :''
 
-        )}
+          )
+        }
       </div>
       <div className="pagination-text">
         Page {currentPage} of {Math.ceil(totalCount / pageSize)}
