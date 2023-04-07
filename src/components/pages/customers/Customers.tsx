@@ -42,7 +42,8 @@ const CustomersList = () => {
             'Contact',
             'Title',
             'City',
-            'Country'
+            'Country',
+            ''
           ]}
         />
       }

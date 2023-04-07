@@ -32,6 +32,7 @@ const Image = styled.img`
 `
 
 const ItemSummary = (props: Props) => {
+  console.log({props})
   return (
     <tbody className={props.class}>
       <tr>

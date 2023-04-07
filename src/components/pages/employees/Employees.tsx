@@ -42,7 +42,7 @@ const EmployeesList = () => {
       table={
         <TableThead
           theads={[
-            '',
+            "",
             'Name',
             'Title',
             'City',
@@ -61,7 +61,6 @@ const EmployeesList = () => {
           "city",
           "homePhone",
           "country",
-          ''
         ]
       }
       pagination={

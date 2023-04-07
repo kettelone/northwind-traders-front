@@ -24,10 +24,35 @@ const RadioLabel= styled.div`
   display: inline-flex;
   position: relative;
 `
+const CustomLabel = styled.label`
+  width: 20px;
+  height:20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(209 213 219);
 
-const Input = styled.input`
-  
+  & input {
+  display: none;
+};
+
+& input:checked + .checkmark{
+  display: inline-block;
+}
+
+& input[type=radio]:checked+.checkmark {
+  border: 4px solid #3b82f6;
+  box-sizing: border-box;
+}
 `
+const Checkmark = styled.span`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: white;
+`
+
 const LabelControl = styled.span`
   font-weight: 400;
   padding-left: 0.5rem;
@@ -50,23 +75,29 @@ const RadioButtons = (props: Props) => {
         <Selector>
           <Control>
             <RadioLabel>
-              <Input
-                type="radio"
-                value='products'
-                checked={props.productsChecked}
-                onChange={props.productChange}
-              />
+              <CustomLabel>
+                <input
+                  type="radio"
+                  value='products'
+                  checked={props.productsChecked}
+                  onChange={props.productChange}
+                />
+                <Checkmark className='checkmark'/>
+              </CustomLabel>
               <LabelControl>Products</LabelControl>
             </RadioLabel>
           </Control>
           <Control>
             <RadioLabel>
-              <Input
-                type="radio"
-                value='customers'
-                checked={props.customerChecked}
-                onChange={props.customerChange}
-              />
+              <CustomLabel>
+                <input
+                  type="radio"
+                  value='customers'
+                  checked={props.customerChecked}
+                  onChange={props.customerChange} 
+                />
+                <Checkmark className='checkmark'   />
+              </CustomLabel>
               <LabelControl>Customers</LabelControl>
             </RadioLabel>
           </Control>
