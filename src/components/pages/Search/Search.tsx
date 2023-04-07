@@ -1,60 +1,52 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { SearchResultCustomers, SearchResultProducts } from './interfaces';
+import { useAppDispatch } from '../../../app/hooks';
+import { update } from '../../../app/updateSQLSlice';
+import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import './Search.css'
-import searchService from '../../../API/SearchService';
+import searchService from '../../../services/searchService';
 import SearchInput from './SearchInput';
 import RadioButtons from './RadioButtons';
 import CompanyResult from './CompanyResult';
 import ProductResult from './ProductResult';
 
-interface SearchResultCustomers{
-    data: {
-      result: {
-        rows: {
-          companyName?: string,
-          id?: number,
-          contactName?: string,
-          contactTitle?: string,
-          phone?: string
-        }[]
-      },
-      searchData: {
-        data:{}
-        metrics:{}
-      }
-    }
-}
+const Container = styled.div`
+  width: 100%;
+  padding-left: 15em;
+  padding-top: 3.5em;
+`
+const Card = styled.div`
+  font-size: 1em;
+  font-family: sans-serif;
+  line-height: 1.5rem;
+  padding: 1.5rem;
+`
 
-interface SearchResultProducts {
-  data: {
-    result: {
-      rows: {
-        id: number,
-        productName: string,
-        quantityPerUnit: string,
-        unitPrice: string,
-        unitsInStock: number
-      }[]
-    },
-    searchData: {
-      data: {}
-      metrics: {}
-    }
-  }
-}
+const Content = styled.div`
+  padding: 1.5rem;
+  background-color: white;
+  `
+
+const SearchResults = styled.div`
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+`
+const NoResult = styled.div`
+  margin-top: 1.5rem;
+`
   
 const Search = () => {
   const [searchInput, setSearchInput] = useState('')
   const [customerChecked, setCustomerChecked] = useState(false)
   const [productsChecked, setProductsChecked] = useState(true)
   const [searchResults, setSearchResults] = useState({})
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const handleDispatch = (response: SearchResultCustomers | SearchResultProducts) => {
     if (response.data.searchData) {
       const { data, metrics } = response.data.searchData
-      dispatch({ type: "ADD_SQL", payload: data, metrics })
+      dispatch(update({data, metrics}))
     }
   }
 
@@ -96,9 +88,9 @@ const Search = () => {
   }
 
   return (
-    <div className='card-container'>
-      <div className="card">
-        <div className="card-content">
+    <Container>
+      <Card>
+        <Content>
           <SearchInput
             handleInput={handleInput}
             handleKeyDown={handleKeyDown} />
@@ -108,7 +100,7 @@ const Search = () => {
             customerChecked={customerChecked}
             customerChange={customerChange}
           />
-          <p className="search-results">Search results</p>
+          <SearchResults>Search results</SearchResults>
           {Array.isArray(searchResults) && searchResults.length > 0
             ?
             searchResults.map((result, index) => 
@@ -116,11 +108,11 @@ const Search = () => {
                 ? <CompanyResult result={result} index={index} key={uuidv4()} />
                 : <ProductResult result={result} index={index} key={uuidv4()} />
               )
-            : <div className='no-results'>No results </div>
+            : <NoResult>No results </NoResult>
           }
-        </div>
-    </div>
-    </div>
+        </Content>
+      </Card>
+    </Container>
   );
 };
 

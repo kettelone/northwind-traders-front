@@ -1,48 +1,42 @@
 import React from 'react';
-import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import ItemSummary
-  from '../../common/itemSummary/ItemSummary';
+import ItemSummary from '../itemSummary/ItemSummary';
+import styled from 'styled-components';
 
-const Container = styled.div`
+const CardContainer = styled.div`
   width: 100%;
   padding-left: 15em;
-  margin-top: -3em;
+  padding-top: 3.5em;
 `
-
 const Card = styled.div`
   font-size: 1em;
   font-family: sans-serif;
   line-height: 1.5rem;
   padding: 1.5rem;
 `
-const Header = styled.div`
-  background-color: white;
-  padding: 0.75rem 1rem;
-  border: 1px solid #e5e7eb;
-`
 
+//TO DO: Replace any with correct one !!!!!!!!!!!
 interface Props {
-  isLoading?: boolean,
-  loader?: JSX.Element,
-  header: JSX.Element | string,
+  isLoading: boolean,
+  loader: JSX.Element,
+  header: JSX.Element,
   table: JSX.Element,
   items: Array<any>,
   tableValues: Array<string>,
   base: string,
-  pagination?: JSX.Element | null,
+  pagination: JSX.Element | null
 }
 
-const ProductInOrderList = (props: Props) => {
+const ItemsList = (props: Props) => {
   return (
-
-    <Container>
+    <CardContainer>
       {
         props.isLoading
-          ? props.loader ? props.loader : ''
+          ? props.loader
+            ? props.loader : ''
           : <Card>
             {
-              props.header ? <Header><b>{props.header}</b></Header> : ''
+              props.header ? props.header : ''
             }
             <table>
               {
@@ -50,9 +44,9 @@ const ProductInOrderList = (props: Props) => {
               }
               {
                 props.items
-                  ?
+                ?
                   props.items.map((item, index) => {
-                    let className = (index % 2) === 0 ? 'grey' : 'white'
+                    let className = (index % 2) === 0 ? 'grey' : ''
                     return (
                       <ItemSummary
                         tableValue={
@@ -62,11 +56,10 @@ const ProductInOrderList = (props: Props) => {
                         value={item}
                         key={uuidv4()}
                         class={className}
-                        prodInOrder={true}
                       />
                     )
                   })
-                  : ''
+                : ''
               }
             </table>
             {
@@ -74,8 +67,8 @@ const ProductInOrderList = (props: Props) => {
             }
           </Card>
       }
-    </Container>
+    </CardContainer>
   );
 };
 
-export default ProductInOrderList;
+export default ItemsList;

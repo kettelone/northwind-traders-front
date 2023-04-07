@@ -1,0 +1,7 @@
+.side-menu-option:hover{
+  background-color: rgb(55 65 81);
+}
+
+.active{
+  background-color: rgb(55 65 81);
+}

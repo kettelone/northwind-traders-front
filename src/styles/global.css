@@ -1,0 +1,46 @@
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: rgb(249 250 251);
+}
+
+table {
+  width: 100%;
+  background-color: white;
+  border-collapse: collapse;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+}
+
+td {
+  border-bottom-width: 0;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+tbody:hover {
+  background-color: #f1f3f7;
+}
+
+th {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(37 99 235);
+}
+
+.grey {
+  background-color: rgb(249 250 251);
+}
+
+.show{
+  display: block !important;
+}
