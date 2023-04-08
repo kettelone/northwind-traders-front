@@ -5,8 +5,6 @@ import styled from 'styled-components';
 
 const CardContainer = styled.div`
   width: 100%;
-  padding-left: 15em;
-  padding-top: 3.5em;
 `
 const Card = styled.div`
   font-size: 1em;

@@ -8,7 +8,6 @@ interface Props{
 }
 
 const Container = styled.div`
-  padding-left: 15em;
   width: 100%;
   margin-top: -3em;
 `

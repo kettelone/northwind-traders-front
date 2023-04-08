@@ -12,8 +12,7 @@ import ProductResult from './ProductResult';
 
 const Container = styled.div`
   width: 100%;
-  padding-left: 15em;
-  padding-top: 3.5em;
+  /* padding-left: 15em; */
 `
 const Card = styled.div`
   font-size: 1em;

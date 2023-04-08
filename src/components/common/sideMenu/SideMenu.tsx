@@ -11,6 +11,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import GroupIcon from '@mui/icons-material/Group';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Link } from 'react-router-dom';
+
 import './SideMenu.css'
 
 const MainContainer = styled.div`
@@ -19,7 +20,12 @@ const MainContainer = styled.div`
   background-color: rgb(31 41 55);
   color: white;
   position: fixed;
+  top:0;
   height: 100%;
+
+  @media only screen and (max-width: 1023px) {
+   margin-left: -15em;
+  }
 `
 
 const HeaderContainer = styled.div`
@@ -54,7 +60,7 @@ const Label = styled.p`
 const SideMenu = () => {
   const { pathname } = useLocation();
   return (
-    <MainContainer>
+    <MainContainer id='side-menu'>
       <HeaderContainer>
         <div>
           <b style={{ fontWeight:'900'}}>Northwind</b> Traders  

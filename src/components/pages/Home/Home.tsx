@@ -4,7 +4,11 @@ import styled from 'styled-components';
 const Section = styled.section`
   display: block;
 	width: 100%;
-	padding: 5em 1.5em 1.5em 16.5em;
+	padding: 1.5em;
+
+  @media only screen and (max-width: 1023px) {
+    padding: 1.5rem;
+  }
 `
 
 const Content = styled.div`

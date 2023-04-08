@@ -6,7 +6,6 @@ import ItemSummary
 
 const Container = styled.div`
   width: 100%;
-  padding-left: 15em;
   margin-top: -3em;
 `
 

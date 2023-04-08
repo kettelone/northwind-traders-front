@@ -4,6 +4,10 @@
   padding: 0px;
 }
 
+ul {
+  list-style: none;
+}
+
 body {
   background-color: rgb(249 250 251);
 }
@@ -44,3 +48,18 @@ a {
 .show{
   display: block !important;
 }
+
+.move{
+  margin-left: 15em!important;
+}
+
+.move-side-menu{
+  margin-left: 0!important;
+}
+
+@media only screen and (min-width: 1023px) {
+  #items-list {
+    margin-left: 15em;
+  }
+}
+

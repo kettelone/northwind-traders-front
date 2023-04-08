@@ -3,18 +3,45 @@ import styled from 'styled-components';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import LinkIcon from '@mui/icons-material/Link';
+import MoreVert from '@mui/icons-material/MoreVert';
 
+const NavBarMain = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  margin-left: 15em;
+  height: 3.5rem;
 
+  @media only screen and (max-width: 1023px) {
+    margin-left: 0;
+  }
+`
+const LeftNavbar =styled.div`
+  display: block;
+  padding: 0.5rem 0.75rem;
+     
+  @media only screen and (min-width: 1023px) {
+      display:none
+    }
+`
+const RightNavBar = styled.div`
+  display: block;
+  padding: 0.5rem 0.75rem;
+
+@media only screen and (min-width: 1023px) {
+      display:none
+    }
+`
 const StyledNavBar = styled.div`
-    position: fixed;
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding-left: 15em;
     width: 100%;
-    height: 3.5em;
-    background: white;
-    border: 1px solid rgb(243 244 246);
+
+    @media only screen and (max-width: 1023px) {
+      display:none
+    }
   `
 
 const NavBarClock = styled.div`
@@ -84,7 +111,7 @@ const NavBar = () => {
     }
   }); 
 
-  const handleDropdown = () => {
+   const handleDropdown = () => {
     document.getElementById("dropdown-content")?.classList.toggle("show");
 
     const dropbtn = document.getElementById("dropbtn");
@@ -93,40 +120,57 @@ const NavBar = () => {
     dropbtn!.style.color = dropbtn!.style.color === ""
       ? linkColor
       : dropbtn!.style.color === "black" ? linkColor : "black"
-
+   }
+  
+  
+  const handleClick = () => {
+  document.getElementById("navbar-main")?.classList.toggle("move");
+  document.getElementById("side-menu")?.classList.toggle("move-side-menu");
+  document.getElementById("items-list")?.classList.toggle("move");
+ 
   }
 
   return (
-    <StyledNavBar>
-      <NavBarClock>
-        {time.toLocaleTimeString("en-GB")}
-      </NavBarClock>
-      <Container>
-        <DropDownContainer onClick={handleDropdown}>
-          <Wrapper id="dropbtn">
-            <span><MenuOutlinedIcon/></span>
-            <DropDownMiddle>SQLite Links</DropDownMiddle>
-            <span><KeyboardArrowDownOutlinedIcon  /></span>
-          </Wrapper>
-          <DropDownContent id="dropdown-content" >
-            <NarBarOption href='https://blog.cloudflare.com/introducing-d1'>
-              <StyledSpan><LinkIcon /></StyledSpan>
-              <LinkText>Introducing D1</LinkText>
-            </NarBarOption>
-            <NarBarOption href="https://www.sqlite.org/lang.html">
-              <StyledSpan><LinkIcon /></StyledSpan>
-              <LinkText>SQLite SQL Flavour</LinkText>
-            </NarBarOption>
-            <NarBarOption
-              href="https://developers.cloudflare.com/workers/learning/using-durable-objects/"
-            >
-              <StyledSpan><LinkIcon /></StyledSpan>
-              <LinkText>Durable Objects</LinkText>
-            </NarBarOption>
-          </DropDownContent>
-        </DropDownContainer>
-      </Container>
-    </StyledNavBar>
+    <NavBarMain id='navbar-main'>
+      <LeftNavbar className="small-navbar">
+        <span onClick={handleClick} className='checkbtn'>
+          <MenuOutlinedIcon/>
+        </span>
+      </LeftNavbar>
+      <RightNavBar className='more-vert'>
+        <MoreVert />
+      </RightNavBar>
+      <StyledNavBar>
+        <NavBarClock>
+          {time.toLocaleTimeString("en-GB")}
+        </NavBarClock>
+        <Container>
+          <DropDownContainer onClick={handleDropdown}>
+            <Wrapper id="dropbtn">
+              <span><MenuOutlinedIcon /></span>
+              <DropDownMiddle>SQLite Links</DropDownMiddle>
+              <span><KeyboardArrowDownOutlinedIcon /></span>
+            </Wrapper>
+            <DropDownContent id="dropdown-content" >
+              <NarBarOption href='https://blog.cloudflare.com/introducing-d1'>
+                <StyledSpan><LinkIcon /></StyledSpan>
+                <LinkText>Introducing D1</LinkText>
+              </NarBarOption>
+              <NarBarOption href="https://www.sqlite.org/lang.html">
+                <StyledSpan><LinkIcon /></StyledSpan>
+                <LinkText>SQLite SQL Flavour</LinkText>
+              </NarBarOption>
+              <NarBarOption
+                href="https://developers.cloudflare.com/workers/learning/using-durable-objects/"
+              >
+                <StyledSpan><LinkIcon /></StyledSpan>
+                <LinkText>Durable Objects</LinkText>
+              </NarBarOption>
+            </DropDownContent>
+          </DropDownContainer>
+        </Container>
+      </StyledNavBar>
+    </NavBarMain>
   );
 };
 

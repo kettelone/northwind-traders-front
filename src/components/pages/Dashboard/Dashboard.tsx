@@ -6,8 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Container = styled.div`
   width: 100%;
-  padding-left: 15em;
-  padding-top: 3.5em;
+  /* padding-left: 15em; */
 `
 
 const Content = styled.div`
@@ -56,6 +55,7 @@ const SingleQuery = styled.div`
 
 const QueryInfo = styled.p`
   color:rgb(156 163 175);
+  font-size:0.75rem;
 `
 
 const SQLQuery = styled.p`

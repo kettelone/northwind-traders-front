@@ -7,8 +7,13 @@ import Property from '../itemProperty/ItemProperty';
 const MainContainer = styled.div`
   display: flex;
   width: 100%;
-  padding-left: 15em;
-  padding-top: 3.5em;
+  /* padding-left: 15em;
+  padding-top: 3.5em; */
+
+  @media only screen and (max-width: 1023px) {
+    padding-left: 0;
+    padding-top: 0;
+  }
 `
 
 const Wrapper = styled.div`
