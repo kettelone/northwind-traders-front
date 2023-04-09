@@ -22,7 +22,7 @@ table {
 
 td {
   border-bottom-width: 0;
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;;
   text-align: left;
   vertical-align: middle;
 }
@@ -61,5 +61,39 @@ a {
   #items-list {
     margin-left: 15em;
   }
+}
+
+@media only screen and (max-width: 1023px) {
+
+    thead{
+      display: none;
+    }
+
+    tr {
+      display: block;
+      position: relative;
+    }
+
+    td{
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
+      border-bottom: 1px solid rgb(243 244 246);
+    }
+
+    td:before {
+      content: attr(data-label);
+      font-weight: 600;
+      padding-right: 0.75rem;
+      text-align: left;
+    }
+
+    tbody{
+      border-bottom: 4px solid rgb(243 244 246);
+    }
+
+    .image-cell{
+      border-bottom-width: 0;
+    }
 }
 

@@ -30,6 +30,9 @@ const CustomersList = () => {
     }
     fetchCustomers();
   }, [currentPage, limit])
+
+  const theads = ['Company', 'Contact', 'Title', 'City', 'Country'];
+
   return (
     <ItemsList
       isLoading={isCustomersLoading}
@@ -38,17 +41,14 @@ const CustomersList = () => {
       table={
         <TableThead
           theads={[
-            'Company',
-            'Contact',
-            'Title',
-            'City',
-            'Country',
+            ...theads,
             ''
           ]}
         />
       }
       items={customers}
       base={'/customer'}
+      theads={theads}
       tableValues={
         [
           "companyName",

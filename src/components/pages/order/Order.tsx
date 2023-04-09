@@ -22,7 +22,7 @@ const Order = () => {
     async function fetchOrder() {
       if (!params.id) {
         return
-      }
+      } 
 
       const response = await OrdersService.getOneById(params.id)
       setProductsInOrder(response.data.productsInOrder)

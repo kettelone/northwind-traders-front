@@ -19,6 +19,7 @@ interface Props {
   loader: JSX.Element,
   header: JSX.Element,
   table: JSX.Element,
+  theads?:string[],
   items: Array<any>,
   tableValues: Array<string>,
   base: string,
@@ -51,6 +52,7 @@ const ItemsList = (props: Props) => {
                           props.tableValues.map(key => item[key])
                         }
                         base={props.base}
+                        theads={props.theads}
                         value={item}
                         key={uuidv4()}
                         class={className}

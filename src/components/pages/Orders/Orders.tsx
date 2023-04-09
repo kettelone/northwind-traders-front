@@ -26,6 +26,16 @@ const OrdersList = () => {
     fetchEmployees();
   }, [currentPage, limit])
 
+  const theads = ['Id',
+    'Total Price',
+    'Products',
+    'Quantity',
+    'Shipped',
+    'Ship Name',
+    'City',
+    'Country'];
+
+
   return (
     <ItemsList
       isLoading={isSuppliersLoading}
@@ -33,20 +43,12 @@ const OrdersList = () => {
       header={<Header title={'Orders'} />}
       table={
         <TableThead
-          theads={[
-            'Id',
-            'Total Price',
-            'Products',
-            'Quantity',
-            'Shipped',
-            'Ship Name',
-            'City',
-            'Country'
-          ]}
+          theads={theads}
         />
       }
       items={orders}
       base={'/order'}
+      theads={theads}
       tableValues={
         [
           "id",

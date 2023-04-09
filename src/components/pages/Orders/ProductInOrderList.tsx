@@ -32,9 +32,10 @@ interface Props {
   pagination?: JSX.Element | null,
 }
 
+const theads = ['Product','Quantity', 'Order Price','Total Price', 'Discount']
+
 const ProductInOrderList = (props: Props) => {
   return (
-
     <Container>
       {
         props.isLoading
@@ -58,6 +59,7 @@ const ProductInOrderList = (props: Props) => {
                           props.tableValues.map(key => item[key])
                         }
                         base={props.base}
+                        theads={theads}
                         value={item}
                         key={uuidv4()}
                         class={className}

@@ -32,6 +32,13 @@ const SuppliersList = () => {
     }
     fetchSuppliers();
   }, [currentPage, limit])
+
+  const theads = [
+    'Company',
+    'Contact',
+    'Title',
+    'City',
+    'Country',]
   
   return (
     <ItemsList
@@ -41,17 +48,14 @@ const SuppliersList = () => {
       table={
         <TableThead
           theads={[
-            'Company',
-            'Contact',
-            'Title',
-            'City',
-            'Country',
+            ...theads,
             ''
           ]}
         />
       }
       items={suppliers}
       base={'/supplier'}
+      theads={theads}
       tableValues={
         [
           "companyName",

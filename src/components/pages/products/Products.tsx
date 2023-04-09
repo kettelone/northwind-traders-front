@@ -31,6 +31,14 @@ const ProductsList = () => {
     fetchProducts();
   }, [currentPage, limit])
 
+  const theads = [
+    'Name',
+    'Qt per unit',
+    'Price',
+    'Stock',
+    'Orders'
+  ]
+
   return (
     <ItemsList
       isLoading={isSuppliersLoading}
@@ -38,17 +46,12 @@ const ProductsList = () => {
       header={<Header title={'Products'} />}
       table={
         <TableThead
-          theads={[
-            'Name',
-            'Qt per unit',
-            'Price',
-            'Stock',
-            'Orders'
-          ]}
+          theads={theads}
         />
       }
       items={products}
       base={'/product'}
+      theads={theads}
       tableValues={
         [
           "productName",

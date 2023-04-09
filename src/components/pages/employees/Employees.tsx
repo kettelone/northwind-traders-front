@@ -32,7 +32,7 @@ const EmployeesList = () => {
     fetchEmployees();
   }, [currentPage, limit])
 
-  console.log({totalPages})
+  const theads = ['Name','Title','City','Phone','Country'];
 
   return (
     <ItemsList
@@ -43,17 +43,14 @@ const EmployeesList = () => {
         <TableThead
           theads={[
             "",
-            'Name',
-            'Title',
-            'City',
-            'Phone',
-            'Country',
+            ...theads,
             ''
           ]}
         />
       }
       items={employees}
       base={'/employee'}
+      theads={theads}
       tableValues={
         [
           "fullName",
